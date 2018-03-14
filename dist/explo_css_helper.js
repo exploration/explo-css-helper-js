@@ -1,45 +1,5 @@
-class ExploCSSDefinitions {
-  static json() {
-    return {
-  "classes": {
-    "btn": "dib pv2 ph5 ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc f6 pointer",
-    "btn-white": "dib pv2 ph5 ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f6 pointer",
-    "btn-l": "dib pv2 ph5 ph6-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc f5 pointer",
-    "btn-l-white": "dib pv2 ph5 ph6-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f5 pointer",
-    "btn-s": "dib pv1 ph4 ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc f6 pointer",
-    "btn-s-white": "dib pv1 ph4 ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f6 pointer",
-    "body": "w-100 x-tahoma f5 fw5 x-blue",
-    "fieldset": "mt3 pv3 ph0 bn",
-    "flash-alert": "pa3 ba bw0 br1 x-bg-palered x-red",
-    "flash-notice": "pa3 ba bw0 br1 x-bg-aquablue white",
-    "form": "w5 pa3 br1 bn x-bg-lightbrown pa3",
-    "form-wide": "w6 pa4 br1 bn x-bg-lightbrown pa3",
-    "h1": "mt5 mb1 f2 f1-ns fw7 x-tahoma",
-    "h2": "mt4 mb1 f3 f2-ns fw7 x-tahoma x-orange",
-    "h3": "mt3 mb1 f4 f3-ns fw7 x-tahoma",
-    "h4": "mt2 mb1 f5 f4-ns fw7 x-tahoma",
-    "headline": "mt5 mb1 f2 f1-ns x-impact",
-    "input-error-label": "mt1 pa2 br1 bn x-bg-palered f6 lh-copy x-red",
-    "input-text": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy",
-    "input-text-narrow": "input-reset db w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy",
-    "label": "db mb1 f6 x-lightblue",
-    "lead": "measure-wide lh-copy f5 fw7",
-    "legend": "tc fw7",
-    "link": "link x-orange x-hover-lightorange pointer",
-    "p": "measure-wide lh-copy f5 fw5",
-    "p-s": "measure-wide lh-copy f6 fw4",
-    "select": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
-    "select-narrow": "input-reset w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
-    "textarea": "input-reset w-100 h4 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy"
-  },
-  "styles": {
-    "select": "appearance: none; background:transparent; background: url(https://cdn.lab.explo.org/images/input_select_arrow.svg) 96% / 15% no-repeat #FFF;"
-  }
-}
-  }
-}
-
 class ExploCSSHelper {
+
 
   /* API Methods */
 
@@ -143,11 +103,10 @@ class ExploCSSHelper {
     this.observer.disconnect()
   }
 
-  // Returns all elements which match the `attr`, including the element passed
-  // and its siblings!
+  // Returns an array of the element and its children, that match the attr
   searchZone(el, attr) {
-    const parent_if_possible = el.parentElement || el
-    const every_child = parent_if_possible.getElementsByTagName('*')
+    const all_elements = Array.from(el.getElementsByTagName('*'))
+    all_elements.push(el)
     const toAttrMatch = (acc, child) => {
       if (child.attributes.hasOwnProperty(attr)) {
         acc.push(child)
@@ -157,6 +116,47 @@ class ExploCSSHelper {
       }
     }
 
-    return Array.from(every_child).reduce(toAttrMatch, [])
+    return all_elements.reduce(toAttrMatch, [])
+  }
+}
+
+class ExploCSSDefinitions {
+  static json() {
+    return {
+  "classes": {
+    "btn": "dib pv2 ph5 ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc f6 pointer",
+    "btn-white": "dib pv2 ph5 ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f6 pointer",
+    "btn-l": "dib pv2 ph5 ph6-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc f5 pointer",
+    "btn-l-white": "dib pv2 ph5 ph6-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f5 pointer",
+    "btn-s": "dib pv1 ph4 ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc f6 pointer",
+    "btn-s-white": "dib pv1 ph4 ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f6 pointer",
+    "body": "w-100 x-tahoma f5 fw5 x-blue",
+    "fieldset": "mt3 pv3 ph0 bn",
+    "flash-alert": "pa3 ba bw0 br1 x-bg-palered x-red",
+    "flash-notice": "pa3 ba bw0 br1 x-bg-aquablue white",
+    "form": "w5 pa3 br1 bn x-bg-lightbrown pa3",
+    "form-wide": "w6 pa4 br1 bn x-bg-lightbrown pa3",
+    "h1": "mt5 mb1 f2 f1-ns fw7 x-tahoma",
+    "h2": "mt4 mb1 f3 f2-ns fw7 x-tahoma x-orange",
+    "h3": "mt3 mb1 f4 f3-ns fw7 x-tahoma",
+    "h4": "mt2 mb1 f5 f4-ns fw7 x-tahoma",
+    "headline": "mt5 mb1 f2 f1-ns x-impact",
+    "input-error-label": "mt1 pa2 br1 bn x-bg-palered f6 lh-copy x-red",
+    "input-text": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy",
+    "input-text-narrow": "input-reset db w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy",
+    "label": "db mb1 f6 x-lightblue",
+    "lead": "measure-wide lh-copy f5 fw7",
+    "legend": "tc fw7",
+    "link": "link x-orange x-hover-lightorange pointer",
+    "p": "measure-wide lh-copy f5 fw5",
+    "p-s": "measure-wide lh-copy f6 fw4",
+    "select": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
+    "select-narrow": "input-reset w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
+    "textarea": "input-reset w-100 h4 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy"
+  },
+  "styles": {
+    "select": "appearance: none; background:transparent; background: url(https://cdn.lab.explo.org/images/input_select_arrow.svg) 96% / 15% no-repeat #FFF;"
+  }
+}
   }
 }
