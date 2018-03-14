@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+puts 'Ensuring that we have the latest styles...'
+system('git submodule update --recursive --remote')
+
+base_dir = File.join(File.dirname(__FILE__), '..')
+json = File.read(File.join(base_dir, 'explo-css-styles-classes', 'explo_styles.json'))
+js_template = File.read(File.join(base_dir, 'lib', 'explo_css_helper.template.js'))
+dist_file_path = File.join(base_dir, 'dist', 'explo_css_helper.js')
+
+json_class = <<~JSON_CLASS
+  class ExploCSSDefinitions {
+    static json() {
+      return #{json}
+    }
+  }
+JSON_CLASS
+
+puts 'Building distribution...'
+File.open(dist_file_path, 'w') do |file|
+  file.puts json_class
+  file.puts ''
+  file.puts js_template
+end
+puts "#{dist_file_path} built."
