@@ -16,8 +16,8 @@
   <title>Explo CSS Helper Test Suite</title>
 </head>
 <body class="w-100 x-tahoma f5 fw5 x-blue">
-  <div class="w-100 mw7-ns center pl3 pr3 pt2-ns pb4-ns pl4-ns pr4-ns">
-    <h1 x-class="h1">Stress-Testing the ExploCSSHelper</h1>
+  <div id="content" class="w-100 mw7-ns center pl3 pr3 pt2-ns pb4-ns pl4-ns pr4-ns">
+    <h1 x-class="h2" x-class-replace="mb1->mb4">Stress-Testing the ExploCSSHelper</h1>
     <div x-class="label">x-class: 'Label'</div>
     <div x-class="label" class="pa2 x-palered x-bg-red">
       x-class + regular classes: 'Label' with a red background and light red text, 'p2'.
@@ -40,17 +40,28 @@
     <div x-class="yellow-div" x-class-replace="x-bg-yellow -> x-bg-green">
       Custom yellow div, now with a green background (replace 'x-bg-yellow' with 'x-bg-green')
     </div>
+
     <hr class="mv4 b--dashed">
+
     <div class="pa3" x-style="be-cool">
       Custom styles: should have orange background + yellow text. Should have class of 'pa3'.
     </div>
+
+    <hr class="mv4 b--dashed">
   </div>
   <script>
     // It's best to run this right at the end of the body, for speedy rendering
     const explo_css_helper = new ExploCSSHelper(ExploCSSDefinitions.json())
     explo_css_helper.register('class', 'yellow-div', 'mv2 pa2 x-bg-yellow x-red')
     explo_css_helper.register('style', 'be-cool', 'background: orange; color: yellow')
-    explo_css_helper.inject()
+    explo_css_helper.start()
+
+    // test adding a new element at this point to ensure that it also gets
+    //style injection...
+    let newDiv = document.createElement('div')
+    newDiv.innerText = "Cool AJAX dynamic element - styled as 'H3'"
+    newDiv.setAttribute('x-class', 'h3')
+    document.querySelector('#content').appendChild(newDiv)
   </script>
 </body>
 </html>

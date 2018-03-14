@@ -54,12 +54,13 @@ class ExploCSSHelper {
   // Run this on document load to inject all style + class replacements with:
   //
   //     css_helper = new ExploCSSHelper
-  //     window.onload = () => css_helper.injectStyles()
+  //     window.onload = () => css_helper.start()
   //
-  inject() {
-    this.injectClasses()
-    this.replaceClasses()
-    this.injectStyles()
+  start() {
+    // inject styles + classes in every element that exists already
+    this.injectAll(document.body)
+    // observe elements for changes + run injectAll() on them when they change
+    this.observe()
   }
  
   // Add your own classes and styles! 
@@ -75,10 +76,16 @@ class ExploCSSHelper {
   }
 
   /* Internal implementation */
+
+  injectAll(element = document.body) {
+    this.injectClasses(element)
+    this.replaceClasses(element)
+    this.injectStyles(element)
+  }
   
   // Monitors for `x-class` attributes and injects the appropriate CSS  
-  injectClasses() {
-    document.querySelectorAll('div[x-class]').forEach(div => {
+  injectClasses(element) {
+    this.searchZone(element, 'x-class').forEach(div => {
       const x_classes = div.attributes['x-class'].value.split(' ')
       if (x_classes) {
         x_classes.forEach(x_class => {
@@ -91,10 +98,23 @@ class ExploCSSHelper {
     })
   }
 
+  // Monitors for `x-class` attributes and injects the appropriate CSS  
+  injectStyles(element) {
+    this.searchZone(element, 'x-style').forEach(div => {
+      const x_style = div.attributes['x-style'].value
+      if (x_style && this.definitions.styles[x_style]) {
+        this.definitions.styles[x_style].split(/;\s*/).forEach(key_val => {
+          const [key, value] = key_val.split(/:\s*/)
+          div.style[key] = value
+        })
+      }
+    })
+  }
+
   // Monitors for `x-class-replace` attributes and injects the appropriate
   // CSS  
-  replaceClasses() {
-    document.querySelectorAll('div[x-class-replace]').forEach(div => {
+  replaceClasses(element) {
+    this.searchZone(element, 'x-class-replace').forEach(div => {
       const x_class_replace = div.attributes['x-class-replace'].value
       const combos = x_class_replace.split(/,\s*/)
       combos.forEach(combo => {
@@ -105,16 +125,38 @@ class ExploCSSHelper {
     })
   }
 
-  // Monitors for `x-class` attributes and injects the appropriate CSS  
-  injectStyles() {
-    document.querySelectorAll('div[x-style]').forEach(div => {
-      const x_style = div.attributes['x-style'].value
-      if (x_style && this.definitions.styles[x_style]) {
-        this.definitions.styles[x_style].split(/;\s*/).forEach(key_val => {
-          const [key, value] = key_val.split(/:\s*/)
-          div.style[key] = value
-        })
+  // Keep an eye on the page for sweet AJAX / dynamic calls + make sure that
+  // any new elements get their classes + styles updated too!
+  observe() {
+    const config = { attributes: true, childList: true }
+    const callback = (mutations_list) => {
+      for(var mutation of mutations_list) {
+        this.injectAll(mutation.target)
       }
-    })
+    }
+
+    this.observer = new MutationObserver(callback)
+    this.observer.observe(document.body, config)
+  }
+
+  stopObserving() {
+    this.observer.disconnect()
+  }
+
+  // Returns all elements which match the `attr`, including the element passed
+  // and its siblings!
+  searchZone(el, attr) {
+    const parent_if_possible = el.parentElement || el
+    const every_child = parent_if_possible.getElementsByTagName('*')
+    const toAttrMatch = (acc, child) => {
+      if (child.attributes.hasOwnProperty(attr)) {
+        acc.push(child)
+        return acc
+      } else {
+        return acc
+      }
+    }
+
+    return Array.from(every_child).reduce(toAttrMatch, [])
   }
 }
