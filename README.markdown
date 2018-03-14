@@ -31,7 +31,7 @@ Typically you'll include `dist/explo_css_helper.js` in your `<HEAD>`:
 <script>
     // It's best to run this right at the end of the body, for speedy rendering
     const explo_css_helper = new ExploCSSHelper(ExploCSSDefinitions.json())
-    explo_css_helper.inject()
+    explo_css_helper.start()
 </script>
 ```
 
@@ -74,7 +74,7 @@ If you have your own "components" that aren't part of the standard set, you can 
 explo_css_helper.register('class', 'h1-orange', 'mt5 mb1 f2 f1-ns fw7 x-tahoma x-orange')
 explo_css_helper.register('style', 'purple-text', 'color: purple;')
 // put ^^ these before...
-explo_css_helper.inject()
+explo_css_helper.start()
 ```
 
 Once you've registered a class or style, it becomes available in the same way as the standard set:
