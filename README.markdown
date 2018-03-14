@@ -103,6 +103,12 @@ If you need to combine multiple replacements, you can comma-separate them:
 <h1 x-class="h1" x-class-replace="mt5 -> mt4, f2 -> f3>H1 With Smaller Font on Mobile</h1>
 ```
 
+The replace syntax will read whatever is to the left of the `->` as a regular expression, so you can even do things like:
+
+```html
+<h1 x-class="h1" x-class-replace="m\w* -> ma4">Replace any margin with 'ma4'</h1>
+```
+
 If you find yourself using this feature a lot, you probably want to register your own components and use those.
 
 # Development
