@@ -2,4 +2,4 @@
 
 require_relative 'builder'
 
-Builder.new.build
+Builder.new.watch

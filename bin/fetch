@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+echo 'Ensuring that we have the latest styles...'
+git submodule update --recursive --remote
