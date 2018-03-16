@@ -31,82 +31,17 @@ class ExploCSSHelper {
   // Example:
   //
   //     css_helper.register('class', 'gross', 'x-bg-yellow x-green')
+  //     css_helper.register('style', 'nasty', 'background: yellow')
   //
   register(type, key, val) {
-    const style_type = type == "class" ? "classes" : "styles"
+    const style_type = type == 'class' ? 'classes' : 'styles'
     this.definitions[style_type][key] = val
   }
 
   /* Internal implementation */
 
-  injectAll(element = document.body) {
-    this.injectClasses(element)
-    this.replaceClasses(element)
-    this.injectStyles(element)
-  }
-  
-  // Monitors for `x-class` attributes and injects the appropriate CSS  
-  injectClasses(element) {
-    this.searchZone(element, 'x-class').forEach(div => {
-      const x_classes = div.attributes['x-class'].value.split(' ')
-      if (x_classes) {
-        x_classes.forEach(x_class => {
-          if (x_class && this.definitions.classes[x_class]) {
-            this.definitions.classes[x_class].split(' ')
-              .forEach(class_name => div.classList.add(class_name))
-          }
-        })
-      }
-    })
-  }
-
-  // Monitors for `x-class` attributes and injects the appropriate CSS  
-  injectStyles(element) {
-    this.searchZone(element, 'x-style').forEach(div => {
-      const x_style = div.attributes['x-style'].value
-      if (x_style && this.definitions.styles[x_style]) {
-        this.definitions.styles[x_style].split(/;\s*/).forEach(key_val => {
-          const [key, value] = key_val.split(/:\s*/)
-          div.style[key] = value
-        })
-      }
-    })
-  }
-
-  // Monitors for `x-class-replace` attributes and injects the appropriate
-  // CSS  
-  replaceClasses(element) {
-    this.searchZone(element, 'x-class-replace').forEach(div => {
-      const x_class_replace = div.attributes['x-class-replace'].value
-      const combos = x_class_replace.split(/,\s*/)
-      combos.forEach(combo => {
-        const [key, val] = combo.split(/\s*->\s*/)
-        const key_regexp = new RegExp(key)
-        div.className = div.className.replace(key_regexp, val)
-      })
-    })
-  }
-
-  // Keep an eye on the page for sweet AJAX / dynamic calls + make sure that
-  // any new elements get their classes + styles updated too!
-  observe() {
-    const config = { attributes: true, childList: true }
-    const callback = (mutations_list) => {
-      for(var mutation of mutations_list) {
-        this.injectAll(mutation.target)
-      }
-    }
-
-    this.observer = new MutationObserver(callback)
-    this.observer.observe(document.body, config)
-  }
-
-  stopObserving() {
-    this.observer.disconnect()
-  }
-
   // Returns an array of the element and its children, that match the attr
-  searchZone(el, attr) {
+  elementAndChildren(el, attr) {
     const all_elements = Array.from(el.getElementsByTagName('*'))
     all_elements.push(el)
     const toAttrMatch = (acc, child) => {
@@ -119,6 +54,80 @@ class ExploCSSHelper {
     }
 
     return all_elements.reduce(toAttrMatch, [])
+  }
+
+  injectAll(element = document.body) {
+    this.injectClasses(element)
+    this.replaceClasses(element)
+    this.injectStyles(element)
+  }
+  
+  // Monitors for `x-class` attributes and injects the appropriate CSS  
+  injectClasses(element) {
+    const applyClasses = function(x_class) {
+      const [div, definitions] = this
+      if (x_class && definitions.classes[x_class]) {
+        definitions.classes[x_class].split(' ')
+          .forEach(class_name => div.classList.add(class_name))
+      }
+    }
+
+    this.elementAndChildren(element, 'x-class').forEach(div => {
+      const x_classes = div.attributes['x-class'].value.split(' ')
+      // passing a custom variable to the function as its "this"
+      if (x_classes) { x_classes.forEach(applyClasses, [div, this.definitions]) }
+    })
+  }
+
+  // Monitors for `x-style` attributes and injects the appropriate styles  
+  injectStyles(element) {
+    const applyStyles = function(pairs) {
+      const [key, value] = pairs.split(/:\s*/)
+      // note that "this" here refers to a 'div', NOT the class object
+      this.style[key] = value
+    }
+
+    const getAndApplyStyles = div => {
+      const x_style = div.attributes['x-style'].value
+      const style_mappings = this.definitions.styles[x_style]
+      if (x_style && style_mappings) {
+        // passing the div to the function as its "this"
+        style_mappings.split(/;\s*/).forEach(applyStyles, div)
+      }
+    }
+
+    this.elementAndChildren(element, 'x-style').forEach(getAndApplyStyles)
+  }
+
+  // Keep an eye on the page for sweet AJAX / dynamic calls + make sure that
+  // any new elements get their classes + styles updated too!
+  observe() {
+    const config = { attributes: true, childList: true }
+    const callback = (mutations_list) => {
+      for (var mutation of mutations_list) {
+        this.injectAll(mutation.target)
+      }
+    }
+
+    this.observer = new MutationObserver(callback)
+    this.observer.observe(document.body, config)
+  }
+
+  // Monitors for `x-class-replace` attributes and injects the appropriate CSS  
+  replaceClasses(element) {
+    this.elementAndChildren(element, 'x-class-replace').forEach(div => {
+      const x_class_replace = div.attributes['x-class-replace'].value
+      const combos = x_class_replace.split(/,\s*/)
+      combos.forEach(combo => {
+        const [key, val] = combo.split(/\s*->\s*/)
+        const key_regexp = new RegExp(key)
+        div.className = div.className.replace(key_regexp, val)
+      })
+    })
+  }
+
+  stopObserving() {
+    this.observer.disconnect()
   }
 }
 
