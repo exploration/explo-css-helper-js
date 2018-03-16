@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+eslint lib/explo_css_helper.template.js

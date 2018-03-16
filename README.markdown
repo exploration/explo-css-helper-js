@@ -115,6 +115,6 @@ If you find yourself using this feature a lot, you probably want to register you
 
 The main JS file is in `lib/explo_css_helper.template.js`. Run `bin/build` to ensure that it's compiled with the latest styles. The output will go into `dist/explo_css_helper.js`. Run `bin/watch` to run a "server" which will keep an eye on the template file for changes + compile automatically.
 
-To run tests, use `bin/server`, which hosts `test/index.html` by default.
+To view the 'test suite', use `bin/test_server`, which hosts `test/index.html` by default. To [lint](https://eslint.org/) the JavaScript code, run `bin/lint`.
 
 To fetch the [latest styles](https://bitbucket.org/snippets/explo/EM6eA/explo-css-styles-classes), run `bin/fetch`.
