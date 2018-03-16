@@ -2,9 +2,8 @@ class Builder
   def initialize
     @base_dir = File.join(File.dirname(__FILE__), '..')
     @template_file_path = File.join(@base_dir, 'lib', 'explo_css_helper.template.js')
-    @dist_file_path = File.join(@base_dir, 'dist', 'explo_css_helper.js')
-
     @css_helper_template = File.read(@template_file_path)
+    @dist_file_path = File.join(@base_dir, 'dist', 'explo_css_helper.js')
   end
 
   def build
@@ -19,8 +18,7 @@ class Builder
 
   def css_definitions_template
     definitions =
-      File.read \
-        File.join(@base_dir, 'explo-css-styles-classes', 'explo_styles.json')
+      File.read File.join(@base_dir, 'explo-css-styles-classes', 'explo_styles.json')
     <<~JSON_CLASS
       class ExploCSSDefinitions {
         static json() {
@@ -32,26 +30,22 @@ class Builder
 
   def template_is_modified?
     @template_ts = File.stat(@template_file_path).mtime.to_i
-    status = 
-      if @previous_template_ts
-        (@template_ts - @previous_template_ts) > 0
-      else
-        false
-      end
+    status =
+      @previous_template_ts ? (@template_ts - @previous_template_ts) > 0 : false
     @previous_template_ts = @template_ts
     return status
   end
 
   def trap_interrupt
     Signal.trap('INT') do
-      puts 'Exiting...'
+      puts ' Exiting...'
       exit
     end
   end
 
   def watch
     puts 'Watching JS template for changes. Press CTRL-C to quit...'
-    while true
+    loop do
       trap_interrupt
       if template_is_modified?
         print 'File modified, '

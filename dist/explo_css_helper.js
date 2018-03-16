@@ -1,17 +1,19 @@
 class ExploCSSHelper {
 
-
   /* API Methods */
 
   // Typically initialized like this:
   //
   //    const explo_css_helper = new ExploCSSHelper(ExploCSSDefinitions.json())
   //
+  // However, you can pass in any JSON that conforms to:
+  //   {classes: {}, styles: {}}
+  //
   constructor(definitions = {classes: {}, styles: {}}) { 
     this.definitions = definitions
   }
 
-  // Run this on document load to inject all style + class replacements with:
+  // Run this on document load to inject all style + class replacements:
   //
   //     css_helper = new ExploCSSHelper
   //     window.onload = () => css_helper.start()
