@@ -22,17 +22,18 @@ Typically you'll include `dist/explo_css_helper.js` in your `<HEAD>`:
 ```html
 <script src="explo_css_helper.js"></script>
 # or, the CDN version:
-<script src="//cdn.explo.org/js/explo_css_helper.js""></script>
+<script src="//cdn.lab.explo.org/js/explo_css_helper.js"></script>
 ```
 
-...and then invoke it like this at the bottom of your HTML:
+...and then invoke it like this at the bottom of your BODY:
 
 ```html
-<script>
-    // It's best to run this right at the end of the body, for speedy rendering
-    const explo_css_helper = new ExploCSSHelper(ExploCSSDefinitions.json())
-    explo_css_helper.start()
-</script>
+  <script>
+      // It's best to run this right at the end of the body, for speedy rendering
+      const explo_css_helper = new ExploCSSHelper(ExploCSSDefinitions.json())
+      explo_css_helper.start()
+  </script>
+</body>
 ```
 
 # Usage
