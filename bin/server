@@ -1,3 +1,10 @@
 #!/usr/bin/env sh
 
-browser-sync --files *
+BS_PATH="$(which browser-sync)"
+
+if [ -e "${BS_PATH}" ]; then
+  browser-sync --files *
+else
+  echo "You need to install browser-sync:"
+  echo "npm install -g browser-sync"
+fi
