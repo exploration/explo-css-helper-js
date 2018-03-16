@@ -2,14 +2,13 @@ class Builder
   def initialize
     @base_dir = File.join(File.dirname(__FILE__), '..')
     @template_file_path = File.join(@base_dir, 'lib', 'explo_css_helper.template.js')
-    @css_helper_template = File.read(@template_file_path)
     @dist_file_path = File.join(@base_dir, 'dist', 'explo_css_helper.js')
   end
 
   def build
     puts 'building distribution...'
     File.open(@dist_file_path, 'w') do |file|
-      file.puts @css_helper_template
+      file.puts css_helper_template
       file.puts ''
       file.puts css_definitions_template
     end
@@ -26,6 +25,10 @@ class Builder
         }
       }
     JSON_CLASS
+  end
+
+  def css_helper_template
+    File.read(@template_file_path)
   end
 
   def template_is_modified?
