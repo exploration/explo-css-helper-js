@@ -1,3 +1,10 @@
 #!/usr/bin/env sh
 
-eslint lib/explo_css_helper.template.js
+ES_PATH="$(which eslint)"
+
+if [ -e "${ES_PATH}" ]; then
+  eslint lib/explo_css_helper.template.js
+else
+  echo "You need to install eslint:"
+  echo "npm install -g eslint"
+fi

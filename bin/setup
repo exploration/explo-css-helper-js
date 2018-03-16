@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+NPM_DIR="$(which npm)"
+
+if [ ! -e "${NPM_DIR}" ]; then
+  echo "You need to install NPM first."
+  echo "brew install npm"
+fi
+
+echo "Installing necessary packages..."
+npm -g i babel-minify eslint browser-sync

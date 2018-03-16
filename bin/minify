@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+MINIFY_PATH="$(which minify)"
+
+if [ -e "${MINIFY_PATH}" ]; then
+  echo "minifying to dist/explo_css_helper.min.js..."
+  minify dist/explo_css_helper.js > dist/explo_css_helper.min.js
+else
+  echo "You need to install minify:"
+  echo "npm install -g babel-minify"
+fi

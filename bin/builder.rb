@@ -13,6 +13,7 @@ class Builder
       file.puts css_definitions_template
     end
     puts "#{@dist_file_path} built."
+    system("sh '#{File.join(@base_dir, 'bin', 'minify')}'")
   end
 
   def css_definitions_template
