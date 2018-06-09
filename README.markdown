@@ -36,6 +36,19 @@ Typically you'll include `dist/explo_css_helper.js` in your `<HEAD>`:
 </body>
 ```
 
+**NOTE** that if you're using Rails and/or Turbolinks, you'll want to use a different CSS helper invocation. Include the following somewhere in your javascript assets:
+
+```javascript
+document.addEventListener("turbolinks:load", function(event) {
+  if (!event.data.timing.visitStart) {
+    // Initial page load sets a global helper
+    window.explo_css_helper = new ExploCSSHelper(ExploCSSDefinitions.json())
+    explo_css_helper.register("class", "courses-h1", "mt2 mb1 f3 f2-ns fw7 x-tahoma")
+  }
+  explo_css_helper.start()
+})
+```
+
 # Usage
 
 ## Basic Usage
