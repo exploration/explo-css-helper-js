@@ -48,6 +48,8 @@
     </div>
 
     <hr class="mv4 b--dashed">
+    <div id="manually-replaced-content">
+    </div>
   </div>
   <script>
     // It's best to run this right at the end of the body, for speedy rendering
@@ -62,6 +64,10 @@
     newDiv.innerText = "Cool AJAX dynamic element - styled as 'H3'"
     newDiv.setAttribute('x-class', 'h3')
     document.querySelector('#content').appendChild(newDiv)
+
+    // test style inject by just setting innerHTML to a thing
+    let newHTML = '<div x-class="h2">This header was created by setting InnerHTML</div>'
+    document.getElementById('manually-replaced-content').innerHTML = newHTML
   </script>
 </body>
 </html>
