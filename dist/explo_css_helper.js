@@ -24,6 +24,11 @@ class ExploCSSHelper {
     // observe elements for changes + run injectAll() on them when they change
     this.observe()
   }
+
+  restart() {
+    this.stopObserving()
+    this.start()
+  }
  
   // Add your own classes and styles! 
   // Send a "type" of either "class" or "style"
