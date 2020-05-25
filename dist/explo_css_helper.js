@@ -140,12 +140,12 @@ class ExploCSSDefinitions {
   static json() {
     return {
   "classes": {
-    "btn": "dib pv2 ph4 ph5-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc ttu x-oswald f5 f4-ns pointer",
-    "btn-white": "dib pv2 ph4 ph5-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc ttu x-oswald f5 f4-ns pointer",
-    "btn-l": "dib pv2 ph5 ph6-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc ttu x-oswald f4 f3-ns pointer",
-    "btn-l-white": "dib pv2 ph5 ph6-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc f5 pointer",
-    "btn-s": "dib pv1 ph4 ph5-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc ttu x-oswald f6 f5-ns pointer",
-    "btn-s-white": "dib pv1 ph4 ph5-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc ttu x-oswald f6 f5-ns pointer",
+    "btn": "dib pv2 ph4 ph5-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc ttu no-underline x-oswald f5 f4-ns pointer",
+    "btn-white": "dib pv2 ph4 ph5-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc ttu no-underline x-oswald f5 f4-ns pointer",
+    "btn-l": "dib pv2 ph5 ph6-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc ttu no-underline x-oswald f4 f3-ns pointer",
+    "btn-l-white": "dib pv2 ph5 ph6-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc ttu no-underline x-oswald f4 f3-ns pointer",
+    "btn-s": "dib pv1 ph4 ph5-ns ba br1 x-b--orange x-bg-orange hover-bg-white white x-hover-orange lh-copy tc ttu no-underline x-oswald f6 f5-ns pointer",
+    "btn-s-white": "dib pv1 ph4 ph5-ns ba br1 x-b--blue bg-white x-hover-bg-lightblue x-blue hover-white lh-copy tc ttu no-underline x-oswald f6 f5-ns pointer",
     "body": "w-100 x-tahoma f5 fw5 x-blue",
     "fieldset": "mt3 pv3 ph0 bn",
     "flash-alert": "pa3 ba bw0 br1 x-bg-palered x-red",
