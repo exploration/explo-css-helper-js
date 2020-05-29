@@ -158,8 +158,8 @@ class ExploCSSDefinitions {
     "h4": "mt2 mb1 f5 f4-ns fw7 x-tahoma",
     "headline": "mt5 mb1 f2 f1-ns x-impact",
     "input-error-label": "mt1 pa2 br1 bn x-bg-palered f6 lh-copy x-red",
-    "input-text": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray lh-copy",
-    "input-text-narrow": "input-reset db w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on  x-bg-palegray lh-copy",
+    "input-text": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy",
+    "input-text-narrow": "input-reset db w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on  x-bg-palegray hover-bg-white lh-copy",
     "label": "db mb1 f6 x-lightblue",
     "lead": "measure-wide lh-copy f5 fw7",
     "legend": "tc fw7",
@@ -168,7 +168,7 @@ class ExploCSSDefinitions {
     "p-s": "measure-wide lh-copy f6 fw4",
     "select": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
     "select-narrow": "input-reset w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
-    "textarea": "input-reset w-100 h4 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy"
+    "textarea": "input-reset w-100 h4 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy"
   },
   "styles": {
     "select": "appearance: none; background:transparent; background: url(https://cdn.lab.explo.org/images/input_select_arrow.svg) 96% / 15% no-repeat #FFF;"
