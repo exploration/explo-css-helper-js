@@ -159,15 +159,15 @@ class ExploCSSDefinitions {
     "headline": "mt5 mb1 f2 f1-ns x-impact",
     "input-error-label": "mt1 pa2 br1 bn x-bg-palered f6 lh-copy x-red",
     "input-text": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy",
-    "input-text-narrow": "input-reset db w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on  x-bg-palegray hover-bg-white lh-copy",
+    "input-text-narrow": "input-reset db w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy",
     "label": "db mb1 f6 x-lightblue",
     "lead": "measure-wide lh-copy f5 fw7",
     "legend": "tc fw7",
     "link": "link x-orange x-hover-lightorange pointer",
     "p": "measure-wide lh-copy f5 fw5",
     "p-s": "measure-wide lh-copy f6 fw4",
-    "select": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
-    "select-narrow": "input-reset w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on lh-copy pointer",
+    "select": "input-reset w-100 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy pointer",
+    "select-narrow": "input-reset w-100 w5-ns pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy pointer",
     "textarea": "input-reset w-100 h4 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy"
   },
   "styles": {
