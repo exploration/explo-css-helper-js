@@ -171,7 +171,7 @@ class ExploCSSDefinitions {
     "textarea": "input-reset w-100 h4 pa2 ba br1 x-b--blue x-focus-b-orange x-on x-bg-palegray hover-bg-white lh-copy"
   },
   "styles": {
-    "select": "appearance: none; background:transparent; background: url(https://cdn.lab.explo.org/images/input_select_arrow.svg) 96% / 15% no-repeat #FFF;"
+    "select": "appearance: none; background:transparent; background: url(https://cdn.lab.explo.org/images/input_select_arrow.svg) 98% / 4rem no-repeat #FFF;"
   }
 }
   }
